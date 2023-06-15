@@ -119,7 +119,7 @@ const main = (
     var topbar = main.addTopbar();
     var menutopbar1 = topbar.addMenu("Files");
     menutopbar1.addButton("Export Human", exportObj, null);
-    menutopbar1.addButton("Export Cloth", exportCloth, null);
+    // menutopbar1.addButton("Export Cloth", exportCloth, null);
     menutopbar1.addButton("Reset Parameters", resetDefaultParams, null);
     var menutopbar2 = topbar.addMenu("Help");
     menutopbar2.addButton("About", showAbout, null);
@@ -169,7 +169,7 @@ const main = (
       false,
       toggleMeasureCurve
     );
-    menuright_render.addCheckbox("Cloth", false, toggleCloth);
+    // menuright_render.addCheckbox("Cloth", false, toggleCloth);
     menuright_render.addColor("Tune Color", [1.0, 1.0, 1.0], tuneColor);
     menuright_render.addButton(
       " The ORIGINAL project is available on : https://zishun.github.io/projects/3DHBGen/"
@@ -520,6 +520,23 @@ const main = (
     a.click();
   }
 
+  // function exportObj() {
+  //   var comments =
+  //     "# Exported from WEBGL-HumanBodyGenerator. Academic use only\n";
+  //   for (var i = 0; i < numParams; ++i) {
+  //     comments += "# " + arrayParamNames[i] + ": " + arrayParams[i] + " cm\n";
+  //   }
+
+  //   var exporter = new THREE.OBJExporter();
+  //   var result = comments + exporter.parse(MESH);
+  //   // var result = comments + exporter.parse(CLOTH_MESH);
+
+  //   // Save the result in localStorage
+  //   localStorage.setItem("exportedObj", result);
+
+  //   console.log("File exported.obj has been saved in localStorage.");
+  // }
+
   function exportCloth() {
     var comments =
       "# Exported from WEBGL-HumanBodyGenerator. Academic use only\n";
@@ -601,8 +618,8 @@ const main = (
 
     var outside = checkConvexHull(cvxHull, x0, 2e-3);
     if (outside == true) {
-      console.log("Fail to solve QP for input:");
-      console.log(arrayParams);
+      // console.log("Fail to solve QP for input:");
+      // console.log(arrayParams);
       resetDefaultParams();
       return;
     }
@@ -707,12 +724,12 @@ const main = (
     MESH.geometry.normalsNeedUpdate = true;
 
     var timeEnd = performance.now();
-    console.log(
-      "Body generation ",
-      Object.keys(GenderEnum)[GENDER],
-      timeEnd - timeStart,
-      " ms."
-    );
+    // console.log(
+    //   "Body generation ",
+    //   Object.keys(GenderEnum)[GENDER],
+    //   timeEnd - timeStart,
+    //   " ms."
+    // );
     //console.log(strTime());
 
     var outside = checkConvexHull(cvxHull, para, 2e-3);
@@ -750,7 +767,7 @@ const main = (
       var timeSP1 = performance.now();
       var cloth_disp = numeric.ccsDot(CLOTH_BIND, numeric.ccsSparse(mesh_disp));
       var timeSP2 = performance.now();
-      console.log("cloth ", timeSP2 - timeSP1, " ms.");
+      // console.log("cloth ", timeSP2 - timeSP1, " ms.");
       cloth_disp = numeric.ccsFull(cloth_disp);
       for (var i = 0; i < CLOTH_MESH.geometry.vertices.length; ++i) {
         CLOTH_MESH.geometry.vertices[i].x =
@@ -774,7 +791,7 @@ const main = (
       var timeSP1 = performance.now();
       var cloth_disp = numeric.ccsDot(CLOTH_BIND, numeric.ccsSparse(mesh_disp));
       var timeSP2 = performance.now();
-      console.log("cloth ", timeSP2 - timeSP1, " ms.");
+      // console.log("cloth ", timeSP2 - timeSP1, " ms.");
       cloth_disp = numeric.ccsFull(cloth_disp);
       for (var i = 0; i < CLOTH_MESH.geometry.vertices.length; ++i) {
         CLOTH_MESH.geometry.vertices[i].x =
@@ -883,7 +900,7 @@ const main = (
           yMax = MESH.geometry.vertices[i].y;
       }
     }
-    console.log(yMax - yMin);
+    // console.log(yMax - yMin);
   }
 
   function tuneColor(color) {
@@ -893,7 +910,7 @@ const main = (
   function showAbout() {
     //window.open('http://homepage.tudelft.nl/h05k3/');
     //window.open('http://www.mae.cuhk.edu.hk/~cwang/');
-    window.open("https://mewangcl.github.io/");
+    window.open("https://SadokBarbouche.github.io/myPortfolio");
   }
 
   function addZero(x, n) {
@@ -926,8 +943,13 @@ const main = (
   }
   // fixme();
   function loadNVM(file) {}
-  // let obj = exportObj();
+  // Usage
+  var exportedObj = exportObj();
+  console.log(exportedObj); // The exported OBJ will be printed in the console
+
   // console.log(obj);
+  // Usage
+  return exportedObj;
 };
 
 let sex = parseInt(modelInput[0]["Sex"]);
@@ -940,17 +962,32 @@ let insideLeg = modelInput[0]["Inside Leg"];
 let shoulder = modelInput[0]["Shoulder"];
 let bodyHeight = modelInput[0]["Body Height"];
 
-console.log(UnderBust)
+// console.log(UnderBust);
 
-main(
-  sex = sex,
-  Bust = bust,
-  UnderBust = UnderBust,
-  Waist = waist,
-  Hip = hip,
-  NeckGirth = neckGirth,
-  InsideLeg = insideLeg,
-  Shoulder = shoulder,
-  BodyHeight = bodyHeight
-);
+// main(
+//   (sex = sex),
+//   (Bust = bust),
+//   (UnderBust = UnderBust),
+//   (Waist = waist),
+//   (Hip = hip),
+//   (NeckGirth = neckGirth),
+//   (InsideLeg = insideLeg),
+//   (Shoulder = shoulder),
+//   (BodyHeight = bodyHeight)
+// );
+
 // var arrayParamsDefaultF = [90.4, 80.6, 80.2, 98.3, 33.4, 76.3, 36.6, 168.0];
+
+obj = main(
+  (sex = sex),
+  (Bust = bust),
+  (UnderBust = UnderBust),
+  (Waist = waist),
+  (Hip = hip),
+  (NeckGirth = neckGirth),
+  (InsideLeg = insideLeg),
+  (Shoulder = shoulder),
+  (BodyHeight = bodyHeight)
+);
+
+// export default obj;

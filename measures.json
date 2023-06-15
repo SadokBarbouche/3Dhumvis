@@ -1,3 +1,1 @@
-
-
-data = '[{"Sex" :"1" ,"Bust" :"90.4" , "Under Bust" : "80.6", "Waist" :"80.2" , "Hip" :"98.3" , "Neck Girth" :"33.4" , "Inside Leg" :"76.3" , "Shoulder" : "36.6", "Body Height" : "168.0"}]';
+data =  ' [ {"Sex": "1", "Bust": "90.4", "Under Bust": "80.6", "Waist": "80.2", "Hip": "98.3", "Neck Girth": "33.4", "Inside Leg": "76.3", "Shoulder": "36.6", "Body Height": "168.0"} ] '
