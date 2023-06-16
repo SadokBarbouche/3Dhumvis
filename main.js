@@ -517,7 +517,6 @@ const main = (
     var a = document.createElement("a");
     a.download = "3DHBGen_export.obj";
     a.href = window.URL.createObjectURL(bb);
-    console.log(a.href);
     a.textContent = "Download ready";
     a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
     a.click();
