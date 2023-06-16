@@ -2,7 +2,7 @@
 
 var modelInput = JSON.parse(data);
 // console.log(modelInput);
-
+var downloadLink;
 const main = (
   sex,
   Bust,
@@ -517,9 +517,10 @@ const main = (
     var a = document.createElement("a");
     a.download = "3DHBGen_export.obj";
     a.href = window.URL.createObjectURL(bb);
+    downloadLink = a.href
     a.textContent = "Download ready";
     a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
-    a.click();
+    // a.click();
   }
 
   // function exportObj() {
@@ -1007,3 +1008,5 @@ obj = main(
 );
 
 // export default obj;
+
+document.getElementById('download_url').innerText = downloadLink;
