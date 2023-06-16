@@ -128,6 +128,8 @@ const main = (
     var rightbar = main.addRightSidebar(onWindowResize); // right bar
     var menuright_body = rightbar.addMenu("Body");
     menuright_body.addTitle("Parameters (cm)");
+    menuright_body.addButton("Dummy button");
+
     menuright_body.addCombobox("Gender", 0, setGender, ["Female", "Male"]);
     for (var i = 0; i < numParams; ++i) {
       var slider;
@@ -520,43 +522,43 @@ const main = (
     a.click();
   }
 
-  // function exportObj() {
-  //   var comments =
-  //     "# Exported from WEBGL-HumanBodyGenerator. Academic use only\n";
-  //   for (var i = 0; i < numParams; ++i) {
-  //     comments += "# " + arrayParamNames[i] + ": " + arrayParams[i] + " cm\n";
-  //   }
-
-  //   var exporter = new THREE.OBJExporter();
-  //   var result = comments + exporter.parse(MESH);
-  //   // var result = comments + exporter.parse(CLOTH_MESH);
-
-  //   // Save the result in localStorage
-  //   localStorage.setItem("exportedObj", result);
-
-  //   console.log("File exported.obj has been saved in localStorage.");
-  // }
-
-  function exportCloth() {
+  function exportObj() {
     var comments =
       "# Exported from WEBGL-HumanBodyGenerator. Academic use only\n";
+    for (var i = 0; i < numParams; ++i) {
+      comments += "# " + arrayParamNames[i] + ": " + arrayParams[i] + " cm\n";
+    }
 
     var exporter = new THREE.OBJExporter();
-    //var result = comments + exporter.parse( MESH );
-    var result = comments + exporter.parse(CLOTH_MESH);
-    var MIME_TYPE = "text/plain";
+    var result = comments + exporter.parse(MESH);
+    // var result = comments + exporter.parse(CLOTH_MESH);
 
-    //window.URL = window.webkitURL || window.URL;
+    // Save the result in localStorage
+    localStorage.setItem("exportedObj", result);
 
-    var bb = new Blob([result], { type: MIME_TYPE });
-
-    var a = document.createElement("a");
-    a.download = "3DHBGen_export_cloth.obj";
-    a.href = window.URL.createObjectURL(bb);
-    a.textContent = "Download ready";
-    a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
-    a.click();
+    console.log("File exported.obj has been saved in localStorage.");
   }
+
+  // function exportCloth() {
+  //   var comments =
+  //     "# Exported from WEBGL-HumanBodyGenerator. Academic use only\n";
+
+  //   var exporter = new THREE.OBJExporter();
+  //   //var result = comments + exporter.parse( MESH );
+  //   var result = comments + exporter.parse(CLOTH_MESH);
+  //   var MIME_TYPE = "text/plain";
+
+  //   //window.URL = window.webkitURL || window.URL;
+
+  //   var bb = new Blob([result], { type: MIME_TYPE });
+
+  //   var a = document.createElement("a");
+  //   a.download = "3DHBGen_export_cloth.obj";
+  //   a.href = window.URL.createObjectURL(bb);
+  //   a.textContent = "Download ready";
+  //   a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
+  //   a.click();
+  // }
 
   function resetDefaultParams() {
     if (GENDER == GenderEnum.Female) {
@@ -944,23 +946,39 @@ const main = (
   // fixme();
   function loadNVM(file) {}
   // Usage
-  var exportedObj = exportObj();
+  // var exportedObj = exportObj();
   console.log(exportedObj); // The exported OBJ will be printed in the console
 
   // console.log(obj);
   // Usage
+
+  // var exportedObj = exportObj();
+
   return exportedObj;
 };
 
-let sex = parseInt(modelInput[0]["Sex"]);
-let bust = modelInput[0]["Bust"];
-let UnderBust = modelInput[0]["Under Bust"];
-let waist = modelInput[0]["Waist"];
-let hip = modelInput[0]["Hip"];
-let neckGirth = modelInput[0]["Neck Girth"];
-let insideLeg = modelInput[0]["Inside Leg"];
-let shoulder = modelInput[0]["Shoulder"];
-let bodyHeight = modelInput[0]["Body Height"];
+// let sex = parseInt(modelInput[0]["Sex"]);
+// let bust = modelInput[0]["Bust"];
+// let UnderBust = modelInput[0]["Under Bust"];
+// let waist = modelInput[0]["Waist"];
+// let hip = modelInput[0]["Hip"];
+// let neckGirth = modelInput[0]["Neck Girth"];
+// let insideLeg = modelInput[0]["Inside Leg"];
+// let shoulder = modelInput[0]["Shoulder"];
+// let bodyHeight = modelInput[0]["Body Height"];
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+let sex = urlParams.get('sex');
+let bust = urlParams.get('Bust');
+let underBust = urlParams.get('UnderBust');
+let waist = urlParams.get('Waist');
+let hip = urlParams.get('Hip');
+let neckGirth = urlParams.get('NeckGirth');
+let insideLeg = urlParams.get('InsideLeg');
+let shoulder = urlParams.get('Shoulder');
+let bodyHeight = urlParams.get('BodyHeight');
 
 // console.log(UnderBust);
 
@@ -981,7 +999,7 @@ let bodyHeight = modelInput[0]["Body Height"];
 obj = main(
   (sex = sex),
   (Bust = bust),
-  (UnderBust = UnderBust),
+  (UnderBust = underBust),
   (Waist = waist),
   (Hip = hip),
   (NeckGirth = neckGirth),
@@ -991,3 +1009,5 @@ obj = main(
 );
 
 // export default obj;
+
+
