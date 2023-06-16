@@ -517,27 +517,28 @@ const main = (
     var a = document.createElement("a");
     a.download = "3DHBGen_export.obj";
     a.href = window.URL.createObjectURL(bb);
+    console.log(a.href);
     a.textContent = "Download ready";
     a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
     a.click();
   }
 
-  function exportObj() {
-    var comments =
-      "# Exported from WEBGL-HumanBodyGenerator. Academic use only\n";
-    for (var i = 0; i < numParams; ++i) {
-      comments += "# " + arrayParamNames[i] + ": " + arrayParams[i] + " cm\n";
-    }
+  // function exportObj() {
+  //   var comments =
+  //     "# Exported from WEBGL-HumanBodyGenerator. Academic use only\n";
+  //   for (var i = 0; i < numParams; ++i) {
+  //     comments += "# " + arrayParamNames[i] + ": " + arrayParams[i] + " cm\n";
+  //   }
 
-    var exporter = new THREE.OBJExporter();
-    var result = comments + exporter.parse(MESH);
-    // var result = comments + exporter.parse(CLOTH_MESH);
+  //   var exporter = new THREE.OBJExporter();
+  //   var result = comments + exporter.parse(MESH);
+  //   // var result = comments + exporter.parse(CLOTH_MESH);
 
-    // Save the result in localStorage
-    localStorage.setItem("exportedObj", result);
+  //   // Save the result in localStorage
+  //   localStorage.setItem("exportedObj", result);
 
-    console.log("File exported.obj has been saved in localStorage.");
-  }
+  //   console.log("File exported.obj has been saved in localStorage.");
+  // }
 
   // function exportCloth() {
   //   var comments =
@@ -947,14 +948,12 @@ const main = (
   function loadNVM(file) {}
   // Usage
   // var exportedObj = exportObj();
-  console.log(exportedObj); // The exported OBJ will be printed in the console
+  // The exported OBJ will be printed in the console
 
   // console.log(obj);
   // Usage
 
-  // var exportedObj = exportObj();
-
-  return exportedObj;
+  exportObj();
 };
 
 // let sex = parseInt(modelInput[0]["Sex"]);
@@ -970,15 +969,15 @@ const main = (
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
-let sex = urlParams.get('sex');
-let bust = urlParams.get('Bust');
-let underBust = urlParams.get('UnderBust');
-let waist = urlParams.get('Waist');
-let hip = urlParams.get('Hip');
-let neckGirth = urlParams.get('NeckGirth');
-let insideLeg = urlParams.get('InsideLeg');
-let shoulder = urlParams.get('Shoulder');
-let bodyHeight = urlParams.get('BodyHeight');
+let sex = urlParams.get("sex");
+let bust = urlParams.get("Bust");
+let underBust = urlParams.get("UnderBust");
+let waist = urlParams.get("Waist");
+let hip = urlParams.get("Hip");
+let neckGirth = urlParams.get("NeckGirth");
+let insideLeg = urlParams.get("InsideLeg");
+let shoulder = urlParams.get("Shoulder");
+let bodyHeight = urlParams.get("BodyHeight");
 
 // console.log(UnderBust);
 
@@ -1009,5 +1008,3 @@ obj = main(
 );
 
 // export default obj;
-
-
