@@ -949,7 +949,7 @@ const main = (
 
     fileInput.click();
   }
-  fixme();
+  // fixme();
   function loadNVM(file) {}
   // Usage
   // var exportedObj = exportObj();
