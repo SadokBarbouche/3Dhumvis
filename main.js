@@ -1,6 +1,4 @@
 // const { mod } = require("numeric");
-
-var modelInput = JSON.parse(data);
 // console.log(modelInput);
 var downloadLink;
 const main = (
@@ -510,17 +508,24 @@ const main = (
     //var result = comments + exporter.parse( CLOTH_MESH );
     var MIME_TYPE = "text/plain";
 
-    //window.URL = window.webkitURL || window.URL;
-
     var bb = new Blob([result], { type: MIME_TYPE });
 
     var a = document.createElement("a");
     a.download = "3DHBGen_export.obj";
     a.href = window.URL.createObjectURL(bb);
-    downloadLink = a.href
+    downloadLink = a.href;
+    document.getElementById("download_url").innerText = downloadLink;
+
     a.textContent = "Download ready";
     a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
     // a.click();
+
+    // Save the file in localStorage
+    var fileData = new FileReader();
+    fileData.onload = function (event) {
+      localStorage.setItem("exportedObj", event.target.result);
+    };
+    fileData.readAsText(bb);
   }
 
   // function exportObj() {
@@ -1008,5 +1013,3 @@ obj = main(
 );
 
 // export default obj;
-
-document.getElementById('download_url').innerText = downloadLink;
