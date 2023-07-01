@@ -518,7 +518,7 @@ const main = (
 
     a.textContent = "Download ready";
     a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
-    // a.click();
+    a.click();
 
     // Save the file in localStorage
     var fileData = new FileReader();
