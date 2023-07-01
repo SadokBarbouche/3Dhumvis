@@ -1,6 +1,5 @@
 // const { mod } = require("numeric");
 // console.log(modelInput);
-var downloadLink;
 const main = (
   sex,
   Bust,
@@ -513,19 +512,16 @@ const main = (
     var a = document.createElement("a");
     a.download = "3DHBGen_export.obj";
     a.href = window.URL.createObjectURL(bb);
-    downloadLink = a.href;
-    document.getElementById("download_url").innerText = downloadLink;
-
     a.textContent = "Download ready";
     a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(":");
     a.click();
 
     // Save the file in localStorage
-    var fileData = new FileReader();
-    fileData.onload = function (event) {
-      localStorage.setItem("exportedObj", event.target.result);
-    };
-    fileData.readAsText(bb);
+    // var fileData = new FileReader();
+    // fileData.onload = function (event) {
+    //   localStorage.setItem("exportedObj", event.target.result);
+    // };
+    // fileData.readAsText(bb);
   }
 
   // function exportObj() {
