@@ -1009,3 +1009,6 @@ obj = main(
 );
 
 // export default obj;
+
+
+window.close();
