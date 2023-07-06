@@ -28,24 +28,28 @@
     <link rel="stylesheet" type="text/css" href="css/yagui.css" />
   </head>
   <body>
-    <div style="height: 100px;">
-<div style="height: 50px;">
-</div>
-  
+    <div style="height: 100px">
+      <div style="height: 50px"></div>
+
+      <div id="viewport"></div>
+      <script type="text/javascript" src="measures.json"></script>
+      <script type="text/javascript" src="main.js"></script>
+
+      <h1 style="color: black; font-size: 50">
+        The default input is from the measures.json
+      </h1>
+      <h1 style="color: red; font-size: 50">
+        Warning ! Everytime you refresh, the model will be downloaded. Not very
+        user friendly but does the job
+      </h1>
+      <p id="download_url" style="position: absolute; z-index: 1"></p>
+    </div>
+
     <div id="viewport"></div>
-    <script type="text/javascript" src="measures.json"></script>
+
     <script type="text/javascript" src="main.js"></script>
-      
-      <h1 style="color: black;font-size: 50;">The default input is from the measures.json</h1>
-  <h1 style="color: red;font-size: 50;">Warning ! Everytime you refresh, the model will be downloaded. Not very user friendly but does the job</h1>
-  <p id="download_url" style="position: absolute;z-index: 1;"></p>
-</div>
-
-<div id="viewport"></div>
-
-<script type="text/javascript" src="main.js"></script>
-</script>
-<script>window.status=""</script>
-    
+    <script>
+      window.status = "";
+    </script>
   </body>
 </html>
